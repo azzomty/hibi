@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ميلاد أسويتي 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@600&display=swap" rel="stylesheet">
+    <style>
+        :root { --pink-main: #ff85a1; --pink-light: #ffe5ec; --text-color: #5a1829; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            background-color: var(--pink-light); 
+            font-family: 'Cairo', sans-serif; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            color: var(--text-color);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .heart { position: absolute; color: rgba(255, 133, 161, 0.3); animation: float 6s infinite linear; font-size: 20px; }
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; } 
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } 
+        }
+
+        .container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 25px; text-align: center; z-index: 1; padding-bottom: 100px; }
+        
+        .screen { 
+            display: none; 
+            width: 100%; 
+            max-width: 450px; 
+            flex-direction: column; 
+            align-items: center; 
+            animation: slideUp 0.6s ease-out; 
+        }
+        .screen.active { display: flex; }
+
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        h1 { font-family: 'Aref Ruqaa', serif; font-size: 1.7rem; color: #d81b60; margin-bottom: 20px; }
+        .reason-text { font-size: 1.1rem; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px dashed var(--pink-main); line-height: 1.7; text-align: right; width: 100%; }
+
+        .sticker-img { width: 160px; border-radius: 20px; margin-top: 20px; }
+        .animal-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 5px solid white; animation: bounce 2s infinite; background: white; }
+        
+        .example-box { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #ffb3c6; color: #4a1524; font-size: 1rem; text-align: right; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .show-example-btn { background: #d81b60; color: white; border: none; padding: 10px 25px; font-size: 1rem; border-radius: 25px; cursor: pointer; margin-top: 15px; font-family: inherit; width: 100%; }
+
+        .manga-box { position: relative; margin-top: 60px; }
+        .manga-bubble { position: absolute; top: -100px; right: -20px; background: white; border: 3px solid black; border-radius: 15px; padding: 12px; width: 180px; font-weight: bold; box-shadow: 5px 5px 0px #000; font-size: 1rem; z-index: 2; line-height: 1.4; }
+        .manga-bubble::after { content: ''; position: absolute; bottom: -12px; left: 20px; border-width: 12px 12px 0 0; border-style: solid; border-color: white transparent transparent transparent; }
+
+        audio { width: 100%; outline: none; margin-top: 15px; border-radius: 30px; }
+        textarea { width: 100%; border-radius: 15px; border: 2px solid var(--pink-main); padding: 15px; font-family: inherit; resize: none; margin-bottom: 15px; font-size: 1rem; }
+        
+        .btn-container { padding: 20px; text-align: center; z-index: 2; width: 100%; position: fixed; bottom: 0; background: linear-gradient(transparent, var(--pink-light) 40%); }
+        .next-btn, .enter-btn { background: var(--pink-main); color: white; border: none; padding: 12px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(255,133,161,0.4); font-family: inherit; }
+        
+        .success-card { display: none; background: white; padding: 30px 20px; border-radius: 25px; flex-direction: column; align-items: center; width: 100%; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .matching-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; direction: ltr; }
+        .matching-grid img { width: 100%; border-radius: 10px; border: 2px solid var(--pink-light); }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    </style>
+</head>
+<body>
+
+    <div class="bg-hearts" id="heartsContainer"></div>
+    <audio id="monkeyVoice" src="https://www.wapsms.net/download/618059/funny_monkey-mp3-ringtone.mp3"></audio>
+
+    <div class="container">
+        
+        <!-- صفحة 0: البداية -->
+        <div class="screen active" id="s0">
+            <h1>كل عام وانت بالف خير اسويتي 🌸</h1>
+            <p>يا افضل بنت تعرفت عليها بحياتي اتمنى تحققي كل امانيك لإنك تستاهلي كل خير يقلبي</p>
+            <img src="c14b207dff0ba98c2b6fc2d7604eb102.jpg" class="sticker-img" style="width: 200px; margin-top: 15px;">
+        </div>
+
+        <!-- صفحات الحيوانات 1، 2، 3 -->
+        <div class="screen" id="s1">
+            <div class="manga-box">
+                <div class="manga-bubble">كل عام وانت بالف خير عقبال ال 100 سنة في طاعة الله</div>
+                <img src="41d9cd296457b9d57f316d8a410bd2f9.jpg" class="animal-img">
+            </div>
+        </div>
+
+        <div class="screen" id="s2">
+            <div class="manga-box">
+                <div class="manga-bubble">كل عام وانت بالف خير ياعيوني اتمنى لك سنة سعيدة</div>
+                <img src="1be27545ff009404dd13a6480e183ea3.jpg" class="animal-img">
+            </div>
+        </div>
+
+        <div class="screen" id="s3">
+            <div class="manga-box">
+                <div class="manga-bubble">كل عام و اسو ب الف خير</div>
+                <img src="WhatsApp Image 2026-05-02 at 3.56.48 PM.jpeg" class="animal-img">
+            </div>
+        </div>
+
+        <!-- صفحة 4: أحبك يعيوني (معدلة) -->
+        <div class="screen" id="s4">
+            <div id="formArea" style="width:100%;">
+                <h1>أحبكِ يعيوني 💖</h1>
+                <p>اتمنى لك كل خير والله يحقق امانيك</p>
+                <form id="wishForm" action="https://formsubmit.co/azamkj8@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <textarea name="message" placeholder="اكتبي أمنيتك هنا لعزام" required></textarea>
+                    <button type="submit" class="enter-btn" id="submitBtn">submit</button>
+                </form>
+            </div>
+            <div class="success-card" id="successCard">
+                <h2>وصلت أمنيتك يعيوني اتمنى تحققي كل امانيك 🌸</h2>
+                <img src="IMG-20260308-WA0126.jpg" class="sticker-img">
+            </div>
+        </div>
+
+        <!-- صفحة 5: الزغروتة -->
+        <div class="screen" id="s5">
+            <h1>زغرتة ام عباس</h1>
+            <div class="reason-text">
+                <audio id="audioZagharit" controls><source src="WhatsApp Audio 2026-05-02 at 6.31.14 PM.ogg" type="audio/ogg"></audio>
+            </div>
+        </div>
+
+        <!-- صفحة 6: الأغنية -->
+        <div class="screen" id="s6">
+            <h1>هبهب تغني</h1>
+            <div class="reason-text">
+                <audio id="audioDandana" controls><source src="WhatsApp Audio 2026-05-02 at 6.31.14 PM (1).ogg" type="audio/ogg"></audio>
+            </div>
+        </div>
+
+        <!-- صفحات أشياء غيرتيها 7-11 -->
+        <div class="screen" id="s7"><h1>أشياء غيرتيها فيني</h1><div class="reason-text">لما عرفتك حبيتك مره كثير وحسيت الدنيا لسه بخير</div></div>
+        <div class="screen" id="s8"><h1>أشياء غيرتيها فيني</h1><div class="reason-text">زدتيني معرفه مره كبيرة بالدين الله يكتب اجرك</div></div>
+        <div class="screen" id="s9"><h1>أشياء غيرتيها فيني</h1><div class="reason-text">زدتيني ب اخلاق مره حلوة يعني في اشياء سيئه كنت اعملها ، بعد م عرفتك صرت ما اعملها ووقفتها</div></div>
+        <div class="screen" id="s10"><h1>أشياء غيرتيها فيني</h1><div class="reason-text">بدون دعمك بالاختبارات ما كنت راح اجيب ال99% ولا قريب منها</div></div>
+        <div class="screen" id="s11"><h1>أشياء غيرتيها فيني</h1><div class="reason-text">ذكرتيني ب إنه لازم اصل صلة الرحم ما كنت اكلم ولا واحد غير اختي من العائله والحين ازدادو</div></div>
+
+        <!-- صفحة 12: ليه أحبك (الطاقة) -->
+        <div class="screen" id="s12">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب طاقتك واحب انك تعطي لي طاقة عالية واحب لما تكون متحمسة</p>
+                <button class="show-example-btn" onclick="revealExample('exNew', this)">مثال 🌸</button>
+                <div class="example-box" id="exNew">الاحظ من طريقة كلامك وذا الشي مررره يحببني فيك</div>
+            </div>
+        </div>
+
+        <!-- صفحة 13: ليه أحبك (السوالف - جديدة) -->
+        <div class="screen" id="s13">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب اسولف معاك</p>
+                <button class="show-example-btn" onclick="revealExample('exChat', this)">مثال 🌸</button>
+                <div class="example-box" id="exChat">مرره احب لما اسولف معاك لو حتى بس نضل نرسل ملصقات مره احب انك بس تحسسيني انك موجودة ذا شي مره كافي حتى لو مافي سوالف او موضوع نتكلم فيه</div>
+            </div>
+        </div>
+
+        <!-- بقية صفحات ليه أحبك 14-27 -->
+        <div class="screen" id="s14">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب صدقك معي مره كثير</p>
+                <button class="show-example-btn" onclick="revealExample('ex1', this)">مثال 🌸</button>
+                <div class="example-box" id="ex1">إنه لما اقول لك فيك شي تقولي لي وش فيك ما تكذبي وتقولي بخير او مافيني شي ولو زعلت مني ب شي تقوليه ما تخليني افكر مع نفسي اصير تلقائي ارتاح لما تجاوبيني عشان اعرف انك صادقة وما راح تكذبي</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s15">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب انه لو في شي مزعلك تقوليه لي ما تقولي مافي شي</p>
+                <button class="show-example-btn" onclick="revealExample('ex2', this)">مثال 🌸</button>
+                <div class="example-box" id="ex2">ب مره قلت لك من وش زعلانة قلت لي بسبب كانيكي وإنه بدأ يتغير وما قلت مافيني شي وسكتِ و انت ابدا مب ثقيلة أو مزعجة لو فضفضت لي والله مره عاتي بالعكس احب انك ما تكتمي الشي الي مزعلك وعزام ب ايت وقت موجود يقلبي لا تكتمي شي مزعلك</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s16">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب كرهك لل الغيبة والنميمة وانك ما تسوي ذا الشي</p>
+                <button class="show-example-btn" onclick="revealExample('ex3', this)">مثال 🌸</button>
+                <div class="example-box" id="ex3">لما قلت لي إنه مستحيل اغتاب واحد واتكلم عنه ب ظهره لو ايش م عمل لو راح اذكره راح يكون بل خير بس</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s17">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب عدم سبك او طعنك لأحد حتى الي طعنوا وسبوك انت بس سكتي</p>
+                <button class="show-example-btn" onclick="revealExample('ex4', this)">مثال 🌸</button>
+                <div class="example-box" id="ex4">انا ما قد شفتك ب حياتي تسبي شخص حتى الي اساءو لك ما قلتي لهم ايت كلمة سيئة وذا ابدا مب ضعف ولا تفكري إنه ضعف بالعكس والله قوة وحسن اخلاق وتربية وحتى في ناس يستعملوا السب ك كلمات عادية بيومهم ويسبوا بدون سبب وانت ابدا وحتى مع سبب ما تسبي فديتك والله الله يثبتك</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s18">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب جمال روحك</p>
+                <button class="show-example-btn" onclick="revealExample('ex5', this)">مثال 🌸</button>
+                <div class="example-box" id="ex5">ذا تقدري تقولي جمع لكل الصفات الحسنة كانت صدق او أمانة أو اهتمامك أو دعمك أو انك تتمني الخير ل غيرك وعدم الأنانية او آلاف من الصفات الحسنة موجودة فيك الله يزيدهم</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s19">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب انك تسامحي كثير وتحطي للي يأذوك اعذار</p>
+                <button class="show-example-btn" onclick="revealExample('ex6', this)">مثال 🌸</button>
+                <div class="example-box" id="ex6">انك اعطيتي عذر ل كانيكي ب الي عمله عشانك ما تعرفي وش عنده ومتأكده إنه ما راح يعمل كذا بدون سبب وذا مره حلو وحسن ظن وعدم تسرع بالحكم وذا مره شي رهيب ويطمني كثير يعني لما انا كنت اتاخر بالرد كنت تعطيني اعذار ومره شي اراحني كنت اخاف انك تزعلي مني لو تاخرت بس انت تعطاء عذاب فديتك والله</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s20">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب انك ما تطلعي شي بدون م تقول للطرف الثاني</p>
+                <button class="show-example-btn" onclick="revealExample('ex7', this)">مثال 🌸</button>
+                <div class="example-box" id="ex7">لما قلت ل ساواكو إذا تسمحي تطلعي السكرينات الي بينها وبين كانيكي بالانستا ووريتيني ذا التصرف مره يزيد ثقتي فيك و يخليني ارتاح بشكل مب طبيعي وحتى لو طلعت شي وما قلت لي عاتي لإني اثق انك ما راح تحاولي تضريني ب شي وحتى لو ضريتيتي اثق إنها مب عن قصد وفداك يقلبي</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s21">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب انك تعتمدي على نفسك</p>
+                <button class="show-example-btn" onclick="revealExample('ex8', this)">مثال 🌸</button>
+                <div class="example-box" id="ex8">لما تطبخي للبيت و لنفسك و تعملي شغل البيت بدون م تعتمدي على أحد ذا شي مرره رهيب و ب مره كنت مريضة وما كان عندك احد بل بيت وانا قلت لك انتبهي ل نفسك و فعلا عملت ل نفسك كمادات ذا الشي مره زود حبي لك وما خليتِ المرض يزيد عليك فديت الي يهتم بنفسه الله يحفظه ويحميه من كل شي</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s22">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 واحب وجودك بحياتي ما اقدر اكمل يومي بدونك</p>
+                <button class="show-example-btn" onclick="revealExample('ex9', this)">مثال 🌸</button>
+                <div class="example-box" id="ex9">مرة احب انك كلميني كل يوم وحتى ب فترات طويلة ذا الشي لحاله مره زاد حبي لك و يومي ابدا ما صار يكمل بدونك واشتاق لك ب غيابك مره كثير ودائما اتمنى انك بخير وين م كنت</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s23">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب انك تسألي عني دائما ما كنت بس انا الي ابادر بالعكس انت كنت تبادري أكثر</p>
+                <button class="show-example-btn" onclick="revealExample('ex10', this)">مثال 🌸</button>
+                <div class="example-box" id="ex10">زمان انت الي كنت تبادري و تسالي عن حالي ب كثره وذا مره حبيته فيك وصرت اسال عليك من فتره ل فتره ومرات افكر اسال عليك بس كنت اقول سالت عليها من فتره قريبة خليها بكره ويجي بكره واشوفك انت بادرت وسالتي عني وذا الشي حببني فيك مره كثير</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s24">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب دعمك لي</p>
+                <button class="show-example-btn" onclick="revealExample('ex11', this)">مثال 🌸</button>
+                <div class="example-box" id="ex11">لما كنت تقولي لي ب اختباراتي هبهب تدعمك دائما لو ايش م كانت نقاطك الي تجيبها المهم عندي انك حاولت ذا الشي خلاني اجيب افضل النقاط وأشد حيلي بشكل أكبر وفعلا جبت نقاط عالية وذا بفضل الله ثم بفضل دعمك لي وفي امثله كثيرة ل دعمك وانت ابدا مافي مره احتجت دعمك وما اعطيتيني إياه</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s25">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب تعاملك معي</p>
+                <button class="show-example-btn" onclick="revealExample('ex12', this)">مثال 🌸</button>
+                <div class="example-box" id="ex12">لما تسالي عني أو تعامليني ب لطف وحنان يزداد حبي لك مره كثير أو حتى الكلمات الحلوة أو حتى لما قلت لي شرايك نطقم ما توقعت راح تقول لي شي زي كذا بس وافقت لأني أحبك و احب اني لما اكون زعلان او متضايق تواسيني يروح عني حزني ب مجرد م اني قلته لك</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s26">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب اهتمامك لي</p>
+                <button class="show-example-btn" onclick="revealExample('ex13', this)">مثال 🌸</button>
+                <div class="example-box" id="ex13">تهتمي ل أبسط تفاصيل يومي يعني حتى بل اختبارات كنت تقول لي ادرس كويس و نام كويس ولو مريض تقول لي لا تنسى تأخذ دوائك ولما كنت تذكريني بل اذكار حسيت ب حنان الام معاك</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s27">
+            <h1>ليه أحبك؟ 🌸</h1>
+            <div class="reason-text">
+                <p style="font-weight: bold; color: #d81b60;">🌸 احب دعواتك لي</p>
+                <button class="show-example-btn" onclick="revealExample('ex14', this)">مثال 🌸</button>
+                <div class="example-box" id="ex14">احب لما تدعي لي وتقولي الله يحفظك لي ويسلمك ويسعدك و دعوات كثيرة وانا متاكد انك تدعي لي اكثر من الي تقوليه بالشات الله يحفظك لي يارب</div>
+                <hr style="margin:15px 0; border:0; border-top:1px solid #ffb3c6;">
+                <p style="font-weight: bold; color:#d81b60; font-size: 1rem;">وذي الاشياء كلها تخليني مررره احبك ومب بس ذول في كثير 💕</p>
+            </div>
+        </div>
+
+        <!-- صفحة 28: التطقيم -->
+        <div class="screen" id="s28">
+            <h1>أول مرة أطقم</h1>
+            <div class="reason-text">
+                <p>انا مره حبيت إنه الشخص الي احبه قال لي تعال نطقم انا بعادتي ما اطقم غير قليل بس اني اطقم مع بنت ذي كانت أول مره اني احس بالثقة والحب اني اطقم مع بنت وحتى ما توقعت انك تقوليها لي</p>
+                <div class="matching-grid" dir="ltr">
+                    <img src="WhatsApp Image 2026-05-02 at 5.32.52 PM (1).jpeg">
+                    <img src="WhatsApp Image 2026-05-02 at 5.32.52 PM.jpeg">
+                    <img src="WhatsApp Image 2026-05-02 at 5.32.53 PM.jpeg">
+                    <img src="WhatsApp Image 2026-05-02 at 5.32.52 PM (2).jpeg">
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحة 29: الخلاصة -->
+        <div class="screen" id="s29">
+            <h1>الخلاصة 💌</h1>
+            <div class="reason-text" style="font-size: 1rem;">
+                <p>المهم بعد ذا كله حاب اقول كل عام وانت بالف خير وانت شخص جدا رهيب واحبك كثير وانت مب شخص سيء وانا مره احب وجودك ب حياتي اتمنى لك كل الخير والتوفيق ولا تزعلي من نفسك أو تقول انك ما تستاهلي شي بالعكس تستاهلي كل خير والي ما يحبك ما يفهم الصراحة ف اتمنى انك تكون متفائله طول حياتك وتعرفي انك ابدا مب شخص سيء أو غير محبوب اتمنى إنه ما يكون عندك فكر زي ذا عن نفسك واعيد كل عام وانت بالف بخير اتمنى تكون سنة سعيدة عليك وتحققي فيها كل امانيك و احبك والله الله يطول بعمرك لأحبابك💞</p>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ffb3c6;">
+                <p style="font-weight: bold; color: #d81b60;">الله يسعدك لي و يخليك دائما سعيدة يارب و يبعد عنك كل حزن أو ضيق صدر ويفرج عنك كل هم الله يحفظك ويخليك لي يارب والله يبعد عننا ايت واحد يحاول يفرق بيننا واحبك والله 💖</p>
+            </div>
+        </div>
+
+        <!-- صفحة 30: النهاية (معدلة) -->
+        <div class="screen" id="s30">
+            <h1>اخر شي</h1>
+            <div class="reason-text" style="text-align: center; background: #fff5f7;">
+                <p style="font-weight: bold; color:#d81b60; font-size: 1.2rem; line-height: 2;">
+                    فضلك كثير علي يعيوني ما اقدر اذكر كل شي <br>
+                    عزام دائما موجود لك يقلبي اعشقك💕
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="btn-container">
+        <button class="next-btn" id="nBtn" onclick="goNext()">التالي ➔</button>
+    </div>
+
+    <script>
+        const container = document.getElementById('heartsContainer');
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart'); heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            container.appendChild(heart);
+        }
+
+        let curr = 0;
+        const totalScreens = 31; // تم التحديث ليصبح 31 صفحة (0-30)
+
+        function goNext() {
+            if (curr === 5) document.getElementById('audioZagharit').pause();
+            if (curr === 6) document.getElementById('audioDandana').pause();
+            
+            document.getElementById('s' + curr).classList.remove('active');
+            curr++;
+            
+            if (curr === 3) document.getElementById('monkeyVoice').play().catch(e=>{});
+            if (curr === totalScreens - 1) document.getElementById('nBtn').style.display = 'none';
+            
+            if (document.getElementById('s' + curr)) {
+                document.getElementById('s' + curr).classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function revealExample(exId, btn) {
+            document.getElementById(exId).style.display = 'block';
+            btn.style.display = 'none';
+        }
+
+        document.getElementById('wishForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('submitBtn').innerHTML = "جاري الإرسال...";
+            fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } })
+            .then(res => { if (res.ok) { document.getElementById('formArea').style.display = 'none'; document.getElementById('successCard').style.display = 'flex'; } });
+        });
+    </script>
+</body>
+</html>
