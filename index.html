@@ -541,6 +541,119 @@
             animation: pulse-glow 2s ease-in-out infinite;
         }
 
+        /* ====== صفحة البروفايلات الجديدة - التصميم الثاني ====== */
+        .profiles-showcase {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0 5px;
+            position: relative;
+        }
+
+        .profile-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .story-ring {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, #ff85a1, #d81b60, #ffb3c6, #ff85a1);
+            background-size: 300% 300%;
+            animation: gradientRotate 4s ease infinite;
+            box-shadow: 0 8px 30px rgba(216, 27, 96, 0.35);
+            position: relative;
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            display: block;
+        }
+
+        .profile-name {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 1.15rem;
+            color: var(--pink-deep);
+            margin-top: 14px;
+            font-weight: 700;
+        }
+
+        .profile-handle {
+            font-size: 0.82rem;
+            color: #999;
+            margin-top: 2px;
+            direction: ltr;
+        }
+
+        .mention-tag {
+            margin-top: 10px;
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-deep));
+            color: white;
+            padding: 7px 16px;
+            border-radius: 25px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(216, 27, 96, 0.35);
+            animation: tagPulse 2.5s ease-in-out infinite;
+            direction: ltr;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        @keyframes tagPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(216, 27, 96, 0.35); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 28px rgba(216, 27, 96, 0.5); }
+        }
+
+        /* العمود الأوسط (القلب + GIF) */
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            gap: 12px;
+        }
+
+        .heart-link {
+            font-size: 2.8rem;
+            animation: heartbeat 1.3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 10px rgba(216, 27, 96, 0.45));
+            z-index: 2;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.18); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.18); }
+            70% { transform: scale(1); }
+        }
+
+        .gif-between {
+            width: 95px;
+            border-radius: 18px;
+            border: 3px solid white;
+            box-shadow: 0 8px 24px rgba(216, 27, 96, 0.25);
+            background: white;
+        }
+
         /* تحسينات للجوال */
         @media (max-width: 480px) {
             h1 { font-size: 1.6rem; }
@@ -548,8 +661,16 @@
             .sticker-img { width: 140px; }
             .animal-img { width: 130px; height: 130px; }
             .manga-bubble { width: 95%; font-size: 0.95rem; }
+            .story-ring { width: 105px; height: 105px; }
+            .profile-name { font-size: 1rem; }
+            .heart-link { font-size: 2.2rem; }
+            .gif-between { width: 80px; }
+            .mention-tag { font-size: 0.78rem; padding: 6px 12px; }
+            .profiles-showcase { gap: 18px; }
         }
     </style>
+<base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -560,13 +681,13 @@
     <audio id="monkeyVoice" src="https://www.wapsms.net/download/618059/funny_monkey-mp3-ringtone.mp3"></audio>
 
     <div class="container">
-        
+
         <!-- صفحة 0: البداية -->
         <div class="screen active" id="s0">
             <div class="glass-card">
                 <h1 class="fade-in-up">كل عام وانت بالف خير اسويتي 🌸</h1>
                 <div class="fancy-divider"></div>
-                <p class="subtitle fade-in-up">يا افضل بنت تعرفت عليها بحياتي اتمنى تحققي كل امانيك لإنك تستاهلي كل خير يقلبي</p>
+                <p class="subtitle fade-in-up">يا افضل شخص تعرفت عليه بحياتي اتمنى تحققي كل امانيك لإنك تستاهلي كل خير يقلبي</p>
                 <img src="c14b207dff0ba98c2b6fc2d7604eb102.jpg" class="sticker-img fade-in-scale glow-effect" alt="sticker">
             </div>
         </div>
@@ -617,7 +738,7 @@
         <!-- صفحة 5: الزغروتة -->
         <div class="screen" id="s5">
             <div class="glass-card">
-                <h1>زغرتة ام عباس</h1>
+                <h1>زغرتة ام عباس🌸</h1>
                 <div class="fancy-divider"></div>
                 <div class="audio-wrapper">
                     <audio id="audioZagharit" controls>
@@ -630,7 +751,7 @@
         <!-- صفحة 6: الأغنية -->
         <div class="screen" id="s6">
             <div class="glass-card">
-                <h1>هبهب تغني</h1>
+                <h1>هبهب تغني🌸</h1>
                 <div class="fancy-divider"></div>
                 <div class="audio-wrapper">
                     <audio id="audioDandana" controls>
@@ -748,7 +869,7 @@
                 <div class="fancy-divider"></div>
                 <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب جمال روحك</p>
                 <button class="show-example-btn" onclick="revealExample('ex5', this)">مثال 🌸</button>
-                <div class="example-box" id="ex5">ذا تقدري تقولي جمع لكل الصفات الحسنة كانت صدق او أمانة أو اهتمامك أو دعمك أو انك تتمني الخير ل غيرك وعدم الأنانية او آلاف من الصفات الحسنة موجودة فيك الله يزيدهم</div>
+                <div class="example-box" id="ex5">ذا تقدري تقولي جمع لكل الصفات الحسنة كانت صدق او أمانة أو اهتمامك أو دعمك أو انك تتمني الخير ل غيرك وعدم الأنانية او آلاف من الصفات الحسنة موجودة فيك الله يبارك</div>
             </div>
         </div>
 
@@ -758,7 +879,7 @@
                 <div class="fancy-divider"></div>
                 <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب انك تسامحي كثير وتحطي للي يأذوك اعذار</p>
                 <button class="show-example-btn" onclick="revealExample('ex6', this)">مثال 🌸</button>
-                <div class="example-box" id="ex6">انك اعطيتي عذر ل كانيكي ب الي عمله عشانك ما تعرفي وش عنده ومتأكده إنه ما راح يعمل كذا بدون سبب وذا مره حلو وحسن ظن وعدم تسرع بالحكم وذا مره شي رهيب ويطمني كثير يعني لما انا كنت اتاخر بالرد كنت تعطيني اعذار ومره شي اراحني كنت اخاف انك تزعلي مني لو تاخرت بس انت تعطاء عذاب فديتك والله</div>
+                <div class="example-box" id="ex6">انك اعطيتي عذر ل كانيكي ب الي عمله عشانك ما تعرفي وش عنده ومتأكده إنه ما راح يعمل كذا بدون سبب وذا مره حلو وحسن ظن وعدم تسرع بالحكم وذا مره شي رهيب ويطمني كثير يعني لما انا كنت اتاخر بالرد كنت تعطيني اعذار ومره شي اراحني كنت اخاف انك تزعلي مني لو تاخرت بس انت تعطي اعذار فديتك والله</div>
             </div>
         </div>
 
@@ -778,7 +899,7 @@
                 <div class="fancy-divider"></div>
                 <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب انك تعتمدي على نفسك</p>
                 <button class="show-example-btn" onclick="revealExample('ex8', this)">مثال 🌸</button>
-                <div class="example-box" id="ex8">لما تطبخي للبيت و لنفسك و تعملي شغل البيت بدون م تعتمدي على أحد ذا شي مرره رهيب و ب مره كنت مريضة وما كان عندك احد بل بيت وانا قلت لك انتبهي ل نفسك و فعلا عملت ل نفسك كمادات ذا الشي مره زود حبي لك وما خليتِ المرض يزيد عليك فديت الي يهتم بنفسه الله يحفظه ويحميه من كل شي</div>
+                <div class="example-box" id="ex8">لما تطبخي للبيت و لنفسك و تعملي شغل البيت بدون م تعتمدي على أحد ذا شي مرره رهيب و ب مره كنت مريضة وما كان عندك احد بل بيت وانا قلت لك انتبهي ل نفسك و فعلا عملت ل نفسك كمادات ذا الشي مره زود حبي لك وما خليتِ المرض يزيد عليك فديت الي تهتم وتعتني بنفسها الله يحفظك ويحميك لي من ايت شي ممكن يضرك و عزام موجود بعد بايت شي اقدر اساعدك فيه راح احاول , مب لازم تشيلي كل شي لوحدك يمديك تعتمدي علي</div>
             </div>
         </div>
 
@@ -788,7 +909,7 @@
                 <div class="fancy-divider"></div>
                 <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 واحب وجودك بحياتي ما اقدر اكمل يومي بدونك</p>
                 <button class="show-example-btn" onclick="revealExample('ex9', this)">مثال 🌸</button>
-                <div class="example-box" id="ex9">مرة احب انك كلميني كل يوم وحتى ب فترات طويلة ذا الشي لحاله مره زاد حبي لك و يومي ابدا ما صار يكمل بدونك واشتاق لك ب غيابك مره كثير ودائما اتمنى انك بخير وين م كنت</div>
+                <div class="example-box" id="ex9">مره احب انك تكلميني كل يوم وحتى ب فترات طويلة ذا الشي لحاله مره زاد حبي لك و يومي ابدا ما صار يكمل بدونك واشتاق لك ب غيابك مره كثير ودائما اتمنى انك بخير وين م كنت</div>
             </div>
         </div>
 
@@ -816,7 +937,7 @@
             <div class="glass-card">
                 <h1>ليه أحبك؟ 🌸</h1>
                 <div class="fancy-divider"></div>
-                <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب تعاملك معي</p>
+                <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب لطفك معي</p>
                 <button class="show-example-btn" onclick="revealExample('ex12', this)">مثال 🌸</button>
                 <div class="example-box" id="ex12">لما تسالي عني أو تعامليني ب لطف وحنان يزداد حبي لك مره كثير أو حتى الكلمات الحلوة أو حتى لما قلت لي شرايك نطقم ما توقعت راح تقول لي شي زي كذا بس وافقت لأني أحبك و احب اني لما اكون زعلان او متضايق تواسيني يروح عني حزني ب مجرد م اني قلته لك</div>
             </div>
@@ -828,11 +949,22 @@
                 <div class="fancy-divider"></div>
                 <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب اهتمامك لي</p>
                 <button class="show-example-btn" onclick="revealExample('ex13', this)">مثال 🌸</button>
-                <div class="example-box" id="ex13">تهتمي ل أبسط تفاصيل يومي يعني حتى بل اختبارات كنت تقول لي ادرس كويس و نام كويس ولو مريض تقول لي لا تنسى تأخذ دوائك ولما كنت تذكريني بل اذكار حسيت ب حنان الام معاك</div>
+                <div class="example-box" id="ex13">تهتمي ل أبسط تفاصيل يومي يعني حتى بل اختبارات كنت تقول لي ادرس كويس و نام كويس ولو مريض تقول لي لا تنسى تأخذ دوائك ولما كنت تذكريني بل اذكار حسيت ب حنان مره مبي</div>
             </div>
         </div>
 
+        <!-- صفحة 27: أحب أنك تحسسيني إني شخص مميز -->
         <div class="screen" id="s27">
+            <div class="glass-card">
+                <h1>ليه أحبك؟ 🌸</h1>
+                <div class="fancy-divider"></div>
+                <p style="font-weight: bold; color: var(--pink-deep); font-size: 1.1rem; margin-bottom: 10px;">🌸 احب انك تحسسيني اني شخص مميز</p>
+                <button class="show-example-btn" onclick="revealExample('exSpecial', this)">مثال 🌸</button>
+                <div class="example-box" id="exSpecial">احب لما تقولي لي شي خاص او ما قلتيه ل كثير ناس زي لما قلت لي إنه اسمك الثاني ليلى أو حتى لما تعامليني ب شكل خاص</div>
+            </div>
+        </div>
+
+        <div class="screen" id="s28">
             <div class="glass-card">
                 <h1>ليه أحبك؟ 🌸</h1>
                 <div class="fancy-divider"></div>
@@ -844,8 +976,69 @@
             </div>
         </div>
 
-        <!-- صفحة 28: التطقيم -->
-        <div class="screen" id="s28">
+        <!-- صفحة 29: أحلامي فيك - أول حلم -->
+        <div class="screen" id="s29">
+            <div class="glass-card">
+                <h1>أحلامي فيك</h1>
+                <div class="fancy-divider"></div>
+                <button class="show-example-btn" onclick="revealExample('exDream1', this)">الحلم الأول 🌸</button>
+                <div class="example-box" id="exDream1">
+                    🌸 اول حلم :<br><br>
+                    حلمت اني كنت العب مع شخصين ومنهم انتِ لعبه نرد وكان فيه 9 مربعات تدخل النرد حقك ب مربع واحد عشان تفوز بالنرد ويصير يشع لون اصفر بالحلم لما تدخله المهم انا دخلت 2 والمفروض ادخل 5 عشان افوز الا والاقيك مدخله لي 3 وفوزتني وسحبت على نفسك ما دخلتي لك انا والله لما صحيت ازداد حبي لك مره كثير
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحة 30: أحلامي فيك - ثاني حلم -->
+        <div class="screen" id="s30">
+            <div class="glass-card">
+                <h1>أحلامي فيك</h1>
+                <div class="fancy-divider"></div>
+                <button class="show-example-btn" onclick="revealExample('exDream2', this)">الحلم الثاني 🌸</button>
+                <div class="example-box" id="exDream2">
+                    🌸 ثاني حلم:<br><br>
+                    حلمت إنه انا كان عندي مشكلة وحليتها بعدين انت جاك نفس المشكلة وحاولت اساعدك ويعني حتى لو بالواقع طلبت مساعدة باذن الله بحاول اساعدك قدر المستطاع
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحة 28: بروفايلات الانستا - التصميم الجديد -->
+        <div class="screen" id="s31">
+            <div class="glass-card" style="padding: 35px 22px;">
+                <h1 style="font-size: 1.55rem;">ممنشنين بعض بالبايو 🌸</h1>
+                <div class="fancy-divider"></div>
+
+                <div class="profiles-showcase">
+                    <!-- بروفايله -->
+                    <div class="profile-item fade-in-up">
+                        <div class="story-ring">
+                            <img src="dbcf8a5e-6562-4bc4-9862-4a37d719d949.jpg" class="profile-avatar" alt="my profile">
+                        </div>
+                        <div class="profile-name">Lennox</div>
+                        <div class="mention-tag">@as_.ys1 🌸🩵</div>
+                    </div>
+
+                    <!-- العمود الأوسط (القلب + GIF) -->
+                    <div class="center-column fade-in-scale">
+                        <div class="heart-link">💞</div>
+                        <img src="gif33.gif" class="gif-between" alt="love gif">
+                    </div>
+
+                    <!-- بروفايلها -->
+                    <div class="profile-item fade-in-up">
+                        <div class="story-ring">
+                            <img src="de13577a-bf29-4307-a245-3e607a0f17a7.jpg" class="profile-avatar" alt="her profile">
+                        </div>
+                        <div class="profile-name">hibi</div>
+                        <div class="mention-tag">@zero_vl.0 🌸🌟</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- صفحة 29: التطقيم -->
+        <div class="screen" id="s32">
             <div class="glass-card">
                 <h1>أول مرة أطقم</h1>
                 <div class="fancy-divider"></div>
@@ -859,8 +1052,8 @@
             </div>
         </div>
 
-        <!-- صفحة 29: الخلاصة -->
-        <div class="screen" id="s29">
+        <!-- صفحة 30: الخلاصة -->
+        <div class="screen" id="s33">
             <div class="glass-card" style="background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,245,248,0.95));">
                 <h1>الخلاصة</h1>
                 <div class="fancy-divider"></div>
@@ -872,8 +1065,8 @@
             </div>
         </div>
 
-        <!-- صفحة 30: النهاية -->
-        <div class="screen" id="s30">
+        <!-- صفحة 31: النهاية -->
+        <div class="screen" id="s34">
             <div class="glass-card" style="background: linear-gradient(135deg, #fff5f7, #ffffff); border: 3px solid var(--pink-main);">
                 <h1>اخر شي 💕</h1>
                 <div class="fancy-divider"></div>
@@ -884,7 +1077,7 @@
                         عزام دائما موجود لك يقلبي<br>
                         <span style="font-size: 1.6rem; display: block; margin-top: 15px;">اعشقك 💕</span>
                     </p>
-                    <div style="margin-top: 25px; font-size: 3rem; animation: gentleBounce 2s infinite;">🌸</div>
+                    <img src="huggiflast.gif" style="width: 160px; border-radius: 24px; margin-top: 25px; box-shadow: 0 12px 30px rgba(216, 27, 96, 0.15); border: 4px solid white; animation: gentleBounce 2s infinite;" alt="hug">
                 </div>
             </div>
         </div>
@@ -899,7 +1092,7 @@
         // إنشاء القلوب الطافية
         const container = document.getElementById('heartsContainer');
         const heartSymbols = ['❤', '💖', '💕', '🌸', '💗', '💝', '💘'];
-        
+
         for (let i = 0; i < 20; i++) {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -912,7 +1105,7 @@
         }
 
         let curr = 0;
-        const totalScreens = 31;
+        const totalScreens = 35;
         let isAnimating = false; // هنا المتغير اللي يمنع التداخل وقت الضغط السريع
 
         // تأثير الكنفيتي
@@ -942,7 +1135,7 @@
 
             // إخفاء الشاشة الحالية
             const currentScreen = document.getElementById('s' + curr);
-            
+
             gsap.to(currentScreen, {
                 opacity: 0,
                 y: -30,
@@ -953,7 +1146,7 @@
                     currentScreen.classList.remove('active');
                     currentScreen.style.opacity = '';
                     currentScreen.style.transform = '';
-                    
+
                     curr++;
 
                     // تشغيل صوت القرد
@@ -975,7 +1168,7 @@
                     const nextScreen = document.getElementById('s' + curr);
                     if (nextScreen) {
                         nextScreen.classList.add('active');
-                        
+
                         // أنيميشن دخول العناصر
                         const elements = nextScreen.querySelectorAll('.fade-in-up, h1, .subtitle, .sticker-img, .animal-img, .glass-card > p');
                         gsap.fromTo(elements,
@@ -989,7 +1182,7 @@
                             { opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: "back.out(1.7)" }
                         );
                     }
-                    
+
                     window.scrollTo({ top: 0, behavior: 'smooth' });
 
                     // يفتح القفل بعد ما تخلص الحركة عشان تقدر تضغط للبعدها
@@ -1016,7 +1209,7 @@
             const btn = document.getElementById('submitBtn');
             btn.innerHTML = "جاري الإرسال... 🌸";
             btn.disabled = true;
-            
+
             fetch(this.action, {
                 method: 'POST',
                 body: new FormData(this),
@@ -1063,7 +1256,7 @@
             const cards = document.querySelectorAll('.glass-card');
             const mouseX = e.clientX / window.innerWidth - 0.5;
             const mouseY = e.clientY / window.innerHeight - 0.5;
-            
+
             cards.forEach(card => {
                 if (card.closest('.screen.active')) {
                     gsap.to(card, {
