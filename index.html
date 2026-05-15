@@ -457,17 +457,19 @@
         .matching-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-top: 20px;
             width: 100%;
             max-width: 100%;
+            overflow: hidden;
         }
 
         .matching-grid img {
             width: 100%;
             max-width: 100%;
             height: auto;
-            border-radius: 16px;
+            max-height: 160px;
+            border-radius: 12px;
             border: 3px solid white;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -768,8 +770,8 @@
             .gif-between { width: 55px; }
             .mention-tag { font-size: 0.68rem; padding: 4px 8px; }
             .profiles-showcase { gap: 6px; }
-            .matching-grid { gap: 8px; }
-            .matching-grid img { border-radius: 12px; border-width: 2px; }
+            .matching-grid { gap: 6px; }
+            .matching-grid img { border-radius: 10px; border-width: 2px; max-height: 130px; }
         }
     </style>
 <base target="_blank">
@@ -1303,7 +1305,7 @@
                         nextScreen.classList.add('active');
 
                         // أنيميشن دخول العناصر
-                        const elements = nextScreen.querySelectorAll('.fade-in-up, h1, .subtitle, .sticker-img, .animal-img, .glass-card > p');
+                        const elements = nextScreen.querySelectorAll('.fade-in-up, h1, .subtitle, .sticker-img, .animal-img, .glass-card > p, .matching-grid, .matching-grid img');
                         gsap.fromTo(elements,
                             { opacity: 0, y: 40 },
                             { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: "power3.out" }
@@ -1394,7 +1396,7 @@
             const mouseY = e.clientY / window.innerHeight - 0.5;
 
             cards.forEach(card => {
-                if (card.closest('.screen.active')) {
+                if (card.closest('.screen.active') && !card.querySelector('.matching-grid')) {
                     gsap.to(card, {
                         rotationY: mouseX * 5,
                         rotationX: -mouseY * 5,
