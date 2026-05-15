@@ -457,19 +457,23 @@
         .matching-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 12px;
             margin-top: 20px;
-            direction: ltr;
+            width: 100%;
+            max-width: 100%;
         }
 
         .matching-grid img {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             border-radius: 16px;
             border: 3px solid white;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             object-fit: cover;
             aspect-ratio: 1;
+            display: block;
         }
 
         .matching-grid img:hover {
@@ -754,7 +758,7 @@
         /* تحسينات للجوال */
         @media (max-width: 480px) {
             h1 { font-size: 1.6rem; }
-            .glass-card { padding: 25px 20px; }
+            .glass-card { padding: 25px 20px; overflow: hidden; }
             .sticker-img { width: 140px; }
             .animal-img { width: 130px; height: 130px; }
             .manga-bubble { width: 95%; font-size: 0.95rem; }
@@ -764,6 +768,8 @@
             .gif-between { width: 55px; }
             .mention-tag { font-size: 0.68rem; padding: 4px 8px; }
             .profiles-showcase { gap: 6px; }
+            .matching-grid { gap: 8px; }
+            .matching-grid img { border-radius: 12px; border-width: 2px; }
         }
     </style>
 <base target="_blank">
